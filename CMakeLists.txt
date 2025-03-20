@@ -1,0 +1,93 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(CXDoom
+    VERSION 1.0
+    LANGUAGES CXX)
+
+if (NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 17)
+endif()
+
+add_executable(
+        doomgeneric
+        doomgeneric/doomgeneric_main.cpp
+        doomgeneric/am_map.cpp
+        doomgeneric/doomdef.cpp
+        doomgeneric/doomstat.cpp
+        doomgeneric/dstrings.cpp
+        doomgeneric/d_event.cpp
+        doomgeneric/d_items.cpp
+        doomgeneric/d_iwad.cpp
+        doomgeneric/d_loop.cpp
+        doomgeneric/d_main.cpp
+        doomgeneric/d_mode.cpp
+        doomgeneric/d_net.cpp
+        doomgeneric/f_finale.cpp
+        doomgeneric/f_wipe.cpp
+        doomgeneric/g_game.cpp
+        doomgeneric/hu_lib.cpp
+        doomgeneric/hu_stuff.cpp
+        doomgeneric/info.cpp
+        doomgeneric/i_cdmus.cpp
+        doomgeneric/i_endoom.cpp
+        doomgeneric/i_joystick.cpp
+        doomgeneric/i_scale.cpp
+        doomgeneric/i_sound.cpp
+        doomgeneric/i_system.cpp
+        doomgeneric/i_timer.cpp
+        doomgeneric/memio.cpp
+        doomgeneric/m_argv.cpp
+        doomgeneric/m_bbox.cpp
+        doomgeneric/m_cheat.cpp
+        doomgeneric/m_config.cpp
+        doomgeneric/m_controls.cpp
+        doomgeneric/m_fixed.cpp
+        doomgeneric/m_menu.cpp
+        doomgeneric/m_misc.cpp
+        doomgeneric/m_random.cpp
+        doomgeneric/p_ceilng.cpp
+        doomgeneric/p_doors.cpp
+        doomgeneric/p_enemy.cpp
+        doomgeneric/p_floor.cpp
+        doomgeneric/p_inter.cpp
+        doomgeneric/p_lights.cpp
+        doomgeneric/p_map.cpp
+        doomgeneric/p_maputl.cpp
+        doomgeneric/p_mobj.cpp
+        doomgeneric/p_plats.cpp
+        doomgeneric/p_pspr.cpp
+        doomgeneric/p_saveg.cpp
+        doomgeneric/p_setup.cpp
+        doomgeneric/p_sight.cpp
+        doomgeneric/p_spec.cpp
+        doomgeneric/p_switch.cpp
+        doomgeneric/p_telept.cpp
+        doomgeneric/p_tick.cpp
+        doomgeneric/p_user.cpp
+        doomgeneric/r_bsp.cpp
+        doomgeneric/r_data.cpp
+        doomgeneric/r_draw.cpp
+        doomgeneric/r_main.cpp
+        doomgeneric/r_plane.cpp
+        doomgeneric/r_segs.cpp
+        doomgeneric/r_sky.cpp
+        doomgeneric/r_things.cpp
+        doomgeneric/sha1.cpp
+        doomgeneric/sounds.cpp
+        doomgeneric/statdump.cpp
+        doomgeneric/st_lib.cpp
+        doomgeneric/st_stuff.cpp
+        doomgeneric/s_sound.cpp
+        doomgeneric/tables.cpp
+        doomgeneric/v_video.cpp
+        doomgeneric/wi_stuff.cpp
+        doomgeneric/w_checksum.cpp
+        doomgeneric/w_file.cpp
+        doomgeneric/w_main.cpp
+        doomgeneric/w_wad.cpp
+        doomgeneric/z_zone.cpp
+        doomgeneric/w_file_stdc.cpp
+        doomgeneric/i_input.cpp
+        doomgeneric/i_video.cpp
+        doomgeneric/doomgeneric_xlib.cpp
+)
