@@ -1,4 +1,4 @@
-//doomgeneric emscripten port
+//src for cross-platform development library 'Simple DirectMedia Layer'
 
 #include "doomkeys.h"
 #include "m_argv.h"
@@ -10,8 +10,6 @@
 #include <stdbool.h>
 #include <SDL.h>
 
-#include <emscripten.h>
-
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Texture* texture;
@@ -22,8 +20,7 @@ static unsigned short s_KeyQueue[KEYQUEUE_SIZE];
 static unsigned int s_KeyQueueWriteIndex = 0;
 static unsigned int s_KeyQueueReadIndex = 0;
 
-static unsigned char convertToDoomKey(unsigned int key)
-{
+static unsigned char convertToDoomKey(unsigned int key){
   switch (key)
     {
     case SDLK_RETURN:
@@ -104,8 +101,7 @@ static unsigned char convertToDoomKey(unsigned int key)
   return key;
 }
 
-static void addKeyToQueue(int pressed, unsigned int keyCode)
-{
+static void addKeyToQueue(int pressed, unsigned int keyCode){
   unsigned char key = convertToDoomKey(keyCode);
 
   unsigned short keyData = (pressed << 8) | key;
@@ -114,33 +110,28 @@ static void addKeyToQueue(int pressed, unsigned int keyCode)
   s_KeyQueueWriteIndex++;
   s_KeyQueueWriteIndex %= KEYQUEUE_SIZE;
 }
-
-static void handleKeyInput()
-{
+static void handleKeyInput(){
   SDL_Event e;
-  while (SDL_PollEvent(&e))
-  {
-    if (e.type == SDL_QUIT)
-    {
+  while (SDL_PollEvent(&e)){
+    if (e.type == SDL_QUIT){
       puts("Quit requested");
       atexit(SDL_Quit);
       exit(1);
     }
-
-    if (e.type == SDL_KEYDOWN)
-    {
+    if (e.type == SDL_KEYDOWN) {
+      //KeySym sym = XKeycodeToKeysym(s_Display, e.xkey.keycode, 0);
+      //printf("KeyPress:%d sym:%d\n", e.xkey.keycode, sym);
       addKeyToQueue(1, e.key.keysym.sym);
-    }
-    else if (e.type == SDL_KEYUP)
-    {
+    } else if (e.type == SDL_KEYUP) {
+      //KeySym sym = XKeycodeToKeysym(s_Display, e.xkey.keycode, 0);
+      //printf("KeyRelease:%d sym:%d\n", e.xkey.keycode, sym);
       addKeyToQueue(0, e.key.keysym.sym);
     }
   }
 }
 
 
-void DG_Init()
-{
+void DG_Init(){
   window = SDL_CreateWindow("DOOM",
                             SDL_WINDOWPOS_UNDEFINED,
                             SDL_WINDOWPOS_UNDEFINED,
@@ -150,7 +141,7 @@ void DG_Init()
                             );
 
   // Setup renderer
-  renderer =  SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
   // Clear winow
   SDL_RenderClear( renderer );
   // Render the rect to the screen
@@ -182,13 +173,10 @@ uint32_t DG_GetTicksMs()
 
 int DG_GetKey(int* pressed, unsigned char* doomKey)
 {
-  if (s_KeyQueueReadIndex == s_KeyQueueWriteIndex)
-  {
+  if (s_KeyQueueReadIndex == s_KeyQueueWriteIndex){
     //key queue is empty
     return 0;
-  }
-  else
-  {
+  }else{
     unsigned short keyData = s_KeyQueue[s_KeyQueueReadIndex];
     s_KeyQueueReadIndex++;
     s_KeyQueueReadIndex %= KEYQUEUE_SIZE;
@@ -204,8 +192,7 @@ int DG_GetKey(int* pressed, unsigned char* doomKey)
 
 void DG_SetWindowTitle(const char * title)
 {
-  if (window != NULL)
-  {
+  if (window != NULL){
     SDL_SetWindowTitle(window, title);
   }
 }
@@ -214,7 +201,11 @@ int main(int argc, char **argv)
 {
     doomgeneric_Create(argc, argv);
 
-    emscripten_set_main_loop(doomgeneric_Tick, 0, 1);
+    for (int i = 0; ; i++)
+    {
+        doomgeneric_Tick();
+    }
     
+
     return 0;
 }

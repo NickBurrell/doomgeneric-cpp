@@ -1,4 +1,4 @@
-//doomgeneric for soso os
+//src for soso os
 
 #include "doomkeys.h"
 #include "m_argv.h"

@@ -1,4 +1,4 @@
-// doomgeneric for Allegro library
+// src for Allegro library
 
 #include "doomkeys.h"
 #include "i_system.h"

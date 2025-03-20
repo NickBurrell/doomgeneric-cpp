@@ -1,4 +1,4 @@
-//doomgeneric for soso os (nano-x version)
+//src for soso os (nano-x version)
 //TODO: get keys from X, not using direct keyboard access!
 
 #include "doomkeys.h"
